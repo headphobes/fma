@@ -33,8 +33,8 @@
   /* SHARED ANIMATION STYLES */
   .fade-heading, .fade-text {
     opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateY(80px); /* Lower start (from 30px) */
+    transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1); /* Slower (from 0.8s) */
   }
 
   .fade-heading.visible, 
@@ -43,12 +43,11 @@
     transform: translateY(0);
   }
 
-  /* Container for better spacing control */
-  .content-container {
-    padding: 20px 0;
-    margin: 0 auto;
-    max-width: 100%;
+  /* PARAGRAPH STYLES */
+  .fade-text {
+    transition-delay: 0.2s; /* Slight delay between elements */
   }
+
 </style>
 
 <script>
