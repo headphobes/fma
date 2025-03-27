@@ -1,0 +1,106 @@
+<!-- Add ALL your content between these lines -->
+<div class="fade-heading">WELCOME</div>
+<div class="fade-text">Founded in 1930, St. George’s School is a leading independent day and boarding school for boys. In our community, students develop the skills to uncover their unique potential. They graduate as life-long learners and leaders along the many paths they choose.</div>
+<!-- End of content -->
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap');
+
+  /* HEADING STYLES */
+  .fade-heading {
+    font-size: 20px;         /* Change heading size */
+    font-weight: 700;        /* Boldness (700 = boldest) */
+    color: #083c1c;          /* Heading color */
+    text-align: center;
+    margin: 40px 0 20px 0;  /* Top Right Bottom Left spacing */
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+
+  /* PARAGRAPH STYLES */
+  .fade-text {
+    font-size: 30px;         /* Paragraph text size */
+    font-weight: 400;        /* Normal thickness */
+    color: #000000;          /* Paragraph color */
+    text-align: center;
+    max-width: 1000px;        /* Optimal reading width */
+    width: 90%;
+    margin: 0 auto 60px auto;/* Centered with bottom spacing */
+    line-height: 1.6;        /* Space between lines */
+    padding: 0 20px;         /* Left/right padding on mobile */
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+
+  /* SHARED ANIMATION STYLES */
+  .fade-heading, .fade-text {
+    opacity: 0;
+    transform: translateY(80px); /* Lower start (from 30px) */
+    transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1); /* Slower (from 0.8s) */
+  }
+
+  .fade-heading.visible, 
+  .fade-text.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* PARAGRAPH STYLES */
+  .fade-text {
+    transition-delay: 0.2s; /* Slight delay between elements */
+  }
+
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const elements = document.querySelectorAll('.fade-heading, .fade-text');
+    let lastScroll = window.pageYOffset;
+
+    function checkVisibility() {
+      const currentScroll = window.pageYOffset;
+      const scrollDown = currentScroll > lastScroll;
+      
+      elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const triggerBottom = window.innerHeight * 0.85;
+        const triggerTop = window.innerHeight * 0.20;
+
+        if (scrollDown) {
+          // Reveal when scrolling down
+          if (elementTop < triggerBottom) {
+            element.classList.add('visible');
+            element.dataset.revealed = "true";
+          }
+        } else {
+          // Hide when scrolling up past trigger point
+          if (elementTop > triggerTop && element.dataset.revealed) {
+            element.classList.remove('visible');
+          }
+        }
+      });
+
+      lastScroll = currentScroll;
+    }
+
+    // Initial check
+    checkVisibility();
+    window.addEventListener('scroll', checkVisibility);
+  });
+  document.addEventListener("DOMContentLoaded", function() {
+    // Combine both element types in one selector
+    const elements = document.querySelectorAll('.fade-heading, .fade-text');
+    
+    function checkVisibility() {
+      const triggerBottom = window.innerHeight * 0.85;
+      
+      elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        element.classList.toggle('visible', elementTop < triggerBottom);
+      });
+    }
+
+    // Initial check
+    checkVisibility();
+    // Scroll listener
+    window.addEventListener('scroll', checkVisibility);
+  });
+</script>
