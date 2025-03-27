@@ -1,0 +1,73 @@
+<!-- Add ALL your content between these lines -->
+<div class="fade-heading">WELCOME</div>
+<div class="fade-text">Founded in 1930, St. George’s School is a leading independent day and boarding school for boys. In our community, students develop the skills to uncover their unique potential. They graduate as life-long learners and leaders along the many paths they choose.</div>
+<!-- End of content -->
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap');
+
+  /* HEADING STYLES */
+  .fade-heading {
+    font-size: 20px;         /* Change heading size */
+    font-weight: 700;        /* Boldness (700 = boldest) */
+    color: #083c1c;          /* Heading color */
+    text-align: center;
+    margin: 40px 0 20px 0;  /* Top Right Bottom Left spacing */
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+
+  /* PARAGRAPH STYLES */
+  .fade-text {
+    font-size: 30px;         /* Paragraph text size */
+    font-weight: 400;        /* Normal thickness */
+    color: #000000;          /* Paragraph color */
+    text-align: center;
+    max-width: 1000px;        /* Optimal reading width */
+    width: 90%;
+    margin: 0 auto 60px auto;/* Centered with bottom spacing */
+    line-height: 1.6;        /* Space between lines */
+    padding: 0 20px;         /* Left/right padding on mobile */
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+
+  /* SHARED ANIMATION STYLES */
+  .fade-heading, .fade-text {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .fade-heading.visible, 
+  .fade-text.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Container for better spacing control */
+  .content-container {
+    padding: 20px 0;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Combine both element types in one selector
+    const elements = document.querySelectorAll('.fade-heading, .fade-text');
+    
+    function checkVisibility() {
+      const triggerBottom = window.innerHeight * 0.85;
+      
+      elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        element.classList.toggle('visible', elementTop < triggerBottom);
+      });
+    }
+
+    // Initial check
+    checkVisibility();
+    // Scroll listener
+    window.addEventListener('scroll', checkVisibility);
+  });
+</script>
